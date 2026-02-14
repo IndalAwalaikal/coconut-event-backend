@@ -1,5 +1,11 @@
 -- Migration Update: Add event_type and price fields
 -- Dialect: MySQL (compatible with XAMPP)
+CREATE DATABASE IF NOT EXISTS coconut_event_hub
+  CHARACTER SET utf8mb4
+  COLLATE utf8mb4_general_ci;
+
+USE coconut_event_hub;
+
 
 SET FOREIGN_KEY_CHECKS = 0;
 
