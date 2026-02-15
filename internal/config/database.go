@@ -12,7 +12,7 @@ import (
 // InitDB initializes a DB connection using environment variables.
 // Defaults are suitable for a local XAMPP installation.
 func InitDB() (*sql.DB, error) {
-    host := getenv("DB_HOST", "127.0.0.1")
+    host := getenv("DB_HOST", "mysql")
     port := getenv("DB_PORT", "3306")
     user := getenv("DB_USER", "root")
     pass := getenv("DB_PASS", "password123")
