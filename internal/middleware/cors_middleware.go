@@ -8,7 +8,7 @@ import (
 // CORS adds permissive CORS headers for development. In production set
 // CORS_ALLOWED and tighten origins.
 func CORS(next http.Handler) http.Handler {
-    allowed := os.Getenv("CORS_ALLOWED")
+    allowed := os.Getenv("CORS_ALLOWEDS")
 
     return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 
