@@ -33,7 +33,8 @@ func main() {
     if port == "" {
         port = "8010"
     }
-    addr := ":" + port
+    addr := "0.0.0.0:" + port
     log.Printf("starting server on %s", addr)
     log.Fatal(http.ListenAndServe(addr, r))
+
 }
