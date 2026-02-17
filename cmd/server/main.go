@@ -8,7 +8,6 @@ import (
 	"github.com/joho/godotenv"
 
 	"github.com/IndalAwalaikal/coconut-event-hub/backend/internal/config"
-	"github.com/IndalAwalaikal/coconut-event-hub/backend/internal/middleware"
 	"github.com/IndalAwalaikal/coconut-event-hub/backend/internal/router"
 )
 
