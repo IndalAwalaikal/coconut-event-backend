@@ -1,26 +1,35 @@
 version: "3.9"
 
 services:
+  # Ini adalah service Backend (Go)
   api:
     build: .
     container_name: coconut-api
     ports:
       - "8081:8081"
-    env_file:
-      - .env
+    environment:
+      - DB_HOST=mysql        # Harus sama dengan nama service di bawah
+      - DB_PORT=3306         # Port internal MySQL
+      - DB_USER=root
+      - DB_PASS=password123
+      - DB_NAME=coconut_event_hub
+      - PORT=8081
+      - CORS_ALLOWEDS=http://event.coconut.or.id
     depends_on:
       - mysql
     restart: always
 
+  # Ini adalah service Database (MySQL)
   mysql:
     image: mysql:8.0.36
     container_name: coconut-mysql
     restart: always
     environment:
-      MYSQL_ROOT_PASSWORD: password123
+      # Password ini harus sama dengan DB_PASS di service api
+      MYSQL_ROOT_PASSWORD: password123 
       MYSQL_DATABASE: coconut_event_hub
     ports:
-      - "3307:3306"
+      - "3307:3306" # Kamu bisa akses DB dari luar VPS lewat port 3307
     volumes:
       - ./dump.sql:/docker-entrypoint-initdb.d/dump.sql
       - mysql_data:/var/lib/mysql
