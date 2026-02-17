@@ -14,7 +14,9 @@ func CORS(next http.Handler) http.Handler {
 
         origin := r.Header.Get("Origin")
 
-        if origin == allowed {
+        if allowed == "*" {
+            w.Header().Set("Access-Control-Allow-Origin", "*")
+        } else if origin == allowed {
             w.Header().Set("Access-Control-Allow-Origin", origin)
             w.Header().Set("Access-Control-Allow-Credentials", "true")
         }
@@ -30,3 +32,4 @@ func CORS(next http.Handler) http.Handler {
         next.ServeHTTP(w, r)
     })
 }
+

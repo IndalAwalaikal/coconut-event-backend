@@ -26,8 +26,6 @@ func main() {
     log.Printf("DB_HOST=%s DB_PORT=%s DB_USER=%s DB_NAME=%s", os.Getenv("DB_HOST"), os.Getenv("DB_PORT"), os.Getenv("DB_USER"), os.Getenv("DB_NAME"))
 
     r := router.NewRouter(db)
-    // wrap with CORS middleware
-    r = middleware.CORS(r)
 
     port := os.Getenv("PORT")
     if port == "" {
