@@ -18,6 +18,10 @@ import (
 func NewRouter(db *sql.DB) http.Handler {
 	r := mux.NewRouter()
 
+	r.Methods("OPTIONS").HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+    w.WriteHeader(http.StatusOK)
+	})
+
 	// Resolve absolute storage directory so file server serves correct files
 	absStorageDir, err := filepath.Abs("storage")
 	if err != nil {
