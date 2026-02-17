@@ -5,8 +5,8 @@ import (
 	"fmt"
 	"os"
 	"time"
-
-	_ "github.com/go-sql-driver/mysql"
+    "crypto/tls"
+	"github.com/go-sql-driver/mysql"
 )
 
 // InitDB initializes a DB connection using environment variables.
@@ -18,7 +18,11 @@ func InitDB() (*sql.DB, error) {
     pass := getenv("DB_PASS", "password123")
     name := getenv("DB_NAME", "coconut_event_hub")
 
-    dsn := fmt.Sprintf("%s:%s@tcp(%s:%s)/%s?parseTime=true&charset=utf8mb4&collation=utf8mb4_general_ci",
+    mysql.RegisterTLSConfig("custom", &tls.Config{
+    InsecureSkipVerify: true,
+    })
+
+    dsn := fmt.Sprintf("%s:%s@tcp(%s:%s)/%s?parseTime=true&charset=utf8mb4&collation=utf8mb4_general_ci&tls=custom",
         user, pass, host, port, name)
 
     db, err := sql.Open("mysql", dsn)
